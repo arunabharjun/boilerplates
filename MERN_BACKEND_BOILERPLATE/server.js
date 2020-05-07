@@ -43,8 +43,10 @@ if (env === 'DEVELOPMENT') {
 
 // routes
 const apiRoutes = require('./routes/apis');
+const authRoutes = require('./routes/auth');
 
 // routes middlewares
+app.use('/api', blogRoutes);
 app.use('/api', apiRoutes);
 
 // app listen
