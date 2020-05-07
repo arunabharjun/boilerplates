@@ -19,7 +19,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // cors
-app.use(cors());
+
+if (env === 'DEVELOPMENT') {
+	app.use(
+		cors({
+			origin: client_app
+		})
+	);
+}
 
 // routes
 app.get('/api', (req, res) => {
