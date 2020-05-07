@@ -33,7 +33,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // cors
-
 if (env === 'DEVELOPMENT') {
 	app.use(
 		cors({
@@ -43,11 +42,10 @@ if (env === 'DEVELOPMENT') {
 }
 
 // routes
-app.get('/api', (req, res) => {
-	res.json({
-		time: Date().toString()
-	});
-});
+const apiRoutes = require('./routes/apis');
+
+// routes middlewares
+app.use('/api', apiRoutes);
 
 // app listen
 app.use(function(req, res) {
