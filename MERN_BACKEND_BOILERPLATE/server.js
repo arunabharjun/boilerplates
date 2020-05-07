@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 // app
@@ -12,6 +13,19 @@ const app = express();
 const port = process.env.PORT || 8000;
 const env = process.env.ENV || 'DEVELOPMENT';
 const client_app = process.env.CLIENT_URL;
+const MONGO_URI = process.env.DATABASE;
+
+// database
+const dbcon = (db_env) => {
+	mongoose
+		.connect(db_env, {
+			useNewUrlParser: true,
+			useCreateIndex: true,
+			useUnifiedTopology: true
+		})
+		.then(() => console.log('[API] : Database Connected'));
+};
+dbcon(MONGO_URI);
 
 // middlewares
 app.use(morgan('dev'));
