@@ -33,8 +33,8 @@ import mongoose from 'mongoose';
  */
 
 interface UserAttrs {
-	email: string;
-	password: string;
+    email: string;
+    password: string;
 }
 
 /**
@@ -43,7 +43,7 @@ interface UserAttrs {
  */
 
 interface UserModel extends mongoose.Model<UserDoc> {
-	build(attrs: UserAttrs): UserDoc;
+    build(attrs: UserAttrs): UserDoc;
 }
 
 /**
@@ -52,44 +52,43 @@ interface UserModel extends mongoose.Model<UserDoc> {
  */
 
 interface UserDoc extends mongoose.Document {
-	email: string;
-	password: string;
-	// createdAt: string;
-	// updatedAt: strig;
+    email: string;
+    password: string;
 }
 
 /**
  * now we define our model using mongoose
  */
 const userSchema = new mongoose.Schema({
-	email:
-		{
-			type: String,
-			required: true
-		},
-	password:
-		{
-			type: String,
-			required: true
-		}
+    email:
+        {
+            type: String,
+            required: true
+        },
+    password:
+        {
+            type: String,
+            required: true
+        }
 });
 
 /**
  * This is how we get a User
  */
-const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
 
 userSchema.statics.build = (attrs: UserAttrs) => {
-	return new User(attrs);
+    return new User(attrs);
 };
+
+const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
 
 /**
  * use can use the following build method to get a new user
  */
 
 // const user = User.build({
-// 	email: 'test@test.com',
-// 	password: 'yayarya'
+//     email: 'test@test.com',
+//     password: 'yayarya'
 // });
 
 export { User };
@@ -101,16 +100,16 @@ In comparison, this is what the JS version of the same looks like
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-	email:
-		{
-			type: String,
-			required: true
-		},
-	password:
-		{
-			type: String,
-			required: true
-		}
+    email:
+        {
+            type: String,
+            required: true
+        },
+    password:
+        {
+            type: String,
+            required: true
+        }
 });
 
 const User = mongoose.model('User', userSchema);
